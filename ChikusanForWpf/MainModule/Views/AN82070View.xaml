@@ -1,0 +1,202 @@
+﻿<UserControl x:Class="JaGunma.MainModule.Views.AN82070View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:JaGunma.MainModule.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="728" d:DesignWidth="1366"
+             VerticalAlignment="Bottom"
+             HorizontalAlignment="Center"
+             Background="#BDBDBD"
+             Loaded="UserControl_Loaded"
+             >
+
+    <!--<UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Style/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>-->
+
+    <i:Interaction.Triggers>
+        <!--InteractionRequestのRaisedイベントに対応するためのTrigger-->
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True"
+                             CenterOverAssociatedObject="True" WindowStyle="{StaticResource MessageBoxWindow}">
+                <!--<prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="ResizeMode" Value="NoResize" />
+                        <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                        <Setter Property="FontFamily" Value="Meiryo UI"/>
+                        <Setter Property="FontSize" Value="{StaticResource AllFontSize}"/>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>-->
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Width="1366" Height="638" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <!--検索条件エリア-->
+            <GroupBox Grid.Row="0"  Style="{StaticResource ItemGroupAreaGroupBox}" Margin="10,0,10,0">
+                <Grid Margin="10,5,10,10" Style="{StaticResource ItemGroupAreaGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="-10,0,0,0">
+                        <Border BorderBrush="#FF5252" BorderThickness="3"  Background="#FFFFFFFF" Padding="0" CornerRadius="10" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Style="{StaticResource TextBlockBase}" Text=" 検索条件" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <!--品名行-->
+                    <Grid Grid.Row="1" Margin="10,2,10,2" Style="{StaticResource ItemGroupRowGrid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource TextBlockBase}" Text="品名コード"/>
+                        <TextBox Grid.Column="1"  Style="{StaticResource TextBoxBase}" TextAlignment="Left" Text="{Binding HimmeiCodeStart,Mode=TwoWay, UpdateSourceTrigger=LostFocus}" InputMethod.PreferredImeState="Off" MaxLength="4"  x:Name="HimmeiCodeStartTextBox" KeyDown="HimmeiCodeStartTextBox_KeyDown"  local:FocusExtension.IsFocused="{Binding IsHimmeiCodeStartFocused, Mode=TwoWay}"/>
+                        <Button Grid.Column="2"  Style="{StaticResource RightDockSearchButton}" Name="HimmeiSearchButton"/>
+                        <TextBlock Grid.Column="3" Style="{StaticResource TextBlockBase}" Text="～"/>
+                        <TextBox Grid.Column="4" Style="{StaticResource TextBoxBase}" TextAlignment="Left" Text="{Binding HimmeiCodeEnd.Value ,UpdateSourceTrigger=LostFocus}"  Margin="10,0,0,0" InputMethod.PreferredImeState="Off" MaxLength="4" Name="HimmeiCodeEndTextBox" KeyDown="HimmeiCodeEndTextBox_KeyDown"/>
+                        <Button Grid.Column="5"  Style="{StaticResource RightDockSearchButton}"/>
+                        <TextBlock Grid.Column="7" Style="{StaticResource TextBlockBase}" Text="品　名"/>
+                        <TextBox Grid.Column="8"  Style="{StaticResource TextBoxBase}" TextAlignment="Left" Text="{Binding Himmei.Value ,UpdateSourceTrigger=LostFocus}"  Margin="0,0,5,0" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="FullShape,Native" MaxLength="100" Name="HimmeiTextBox" KeyDown="HimmeiTextBox_KeyDown"/>
+                    </Grid>
+                    <!--団体行-->
+                    <Grid Grid.Row="2" Margin="10,2,10,2" Style="{StaticResource ItemGroupRowGrid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource TextBlockBase}" Text="団体コード"/>
+                        <TextBox Grid.Column="1" Style="{StaticResource TextBoxBase}" TextAlignment="Left" Text="{Binding DantaiCodeStart.Value ,UpdateSourceTrigger=LostFocus}"  InputMethod.PreferredImeState="Off" MaxLength="3" Name="DantaiCodeStartTextBox" KeyDown="DantaiCodeStartTextBox_KeyDown"/>
+                        <Button Grid.Column="2"  Style="{StaticResource RightDockSearchButton}"/>
+                        <TextBlock Grid.Column="3" Style="{StaticResource TextBlockBase}" Text="～"/>
+                        <TextBox Grid.Column="4" Style="{StaticResource TextBoxBase}" TextAlignment="Left"  Text="{Binding DantaiCodeEnd.Value ,UpdateSourceTrigger=LostFocus}"  Margin="10,0,0,0" InputMethod.PreferredImeState="Off" MaxLength="3" Name="DantaiCodeEndTextBox" KeyDown="DantaiCodeEndTextBox_KeyDown"/>
+                        <Button Grid.Column="5"  Style="{StaticResource RightDockSearchButton}"/>
+                        <TextBlock Grid.Column="7" Style="{StaticResource TextBlockBase}" Text="団　体"/>
+                        <TextBox Grid.Column="8" Style="{StaticResource TextBoxBase}" TextAlignment="Left" Text="{Binding DantaiName.Value ,UpdateSourceTrigger=LostFocus}"  Margin="0,0,5,0"  InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="FullShape,Native" MaxLength="20"  Name="DantaiNameTextBox" KeyDown="DantaiNameTextBox_KeyDown"/>
+                    </Grid>
+                    <!--更新者行-->
+                    <Grid Grid.Row="3" Margin="10,2,10,2" Style="{StaticResource ItemGroupRowGrid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource TextBlockBase}" Text="更新者"/>
+                        <TextBox Grid.Column="1" Style="{StaticResource TextBoxBase}" TextAlignment="Left" Text="{Binding KoushinshaCode.Value ,UpdateSourceTrigger=LostFocus}"  InputMethod.PreferredImeState="Off"  MaxLength="10"  Name="KoushinshaCodeTextBox" KeyDown="KoushinshaCodeTextBox_KeyDown"/>
+                        <Button Grid.Column="2"  Style="{StaticResource RightDockSearchButton}"/>
+                        <TextBox Grid.Column="3" Style="{StaticResource TextBoxBase}" Grid.ColumnSpan="3" TextAlignment="Left" Text="{Binding KoushinshaName.Value ,UpdateSourceTrigger=LostFocus}" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="FullShape,Native" MaxLength="20" Name="KoushinshaNameTextBox" KeyDown="KoushinshaNameTextBox_KeyDown"/>
+                    </Grid>
+                    <!--更新日行-->
+                    <Grid Grid.Row="4" Margin="10,2,10,2" Style="{StaticResource ItemGroupRowGrid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource TextBlockBase}" Text="更新日"/>
+                        <TextBox Grid.Column="1"  Style="{StaticResource TextBoxBase}" Grid.ColumnSpan="2" TextAlignment="Left" Text="{Binding KoushinDateStart.Value ,UpdateSourceTrigger=LostFocus}" InputMethod.PreferredImeState="Off" MaxLength="10" Name="KoushinDateStartTextBox" KeyDown="KoushinDateStartTextBox_KeyDown"/>
+                        <TextBlock Grid.Column="3" Style="{StaticResource TextBlockBase}" Text="～"/>
+                        <TextBox Grid.Column="4" Style="{StaticResource TextBoxBase}" Grid.ColumnSpan="2" TextAlignment="Left" Text="{Binding KoushinDateEnd.Value ,UpdateSourceTrigger=LostFocus}" Margin="10,0,0,0"  InputMethod.PreferredImeState="Off"  MaxLength="10" Name="KoushinDateEndTextBox" KeyDown="KoushinDateEndTextBox_KeyDown"/>
+                        <CheckBox Grid.Column="7" Style="{StaticResource CheckBoxBase}" Grid.ColumnSpan="2" Content="停止中を含める" IsChecked="{Binding IsStop.Value ,UpdateSourceTrigger=LostFocus}"  Margin="60,0,0,0" Name="StopCheckBox"/>
+                        <Button Grid.Column="9" Style="{StaticResource ButtonBase}" Content="検　索" HorizontalAlignment="Right" Margin="0,0,0,0" Command="{Binding SearchCommand}" Name="SearchButton"  Height="28"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+
+            <!--検索結果エリア-->
+            <GroupBox Grid.Row="1" Style="{StaticResource ItemGroupAreaGroupBox}"  Margin="10">
+                <Grid Margin="15,2,15,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="19*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="-15,2,0,0">
+                        <Border BorderBrush="#FF5252" BorderThickness="3"  Background="#FFFFFFFF" Padding="0" CornerRadius="10" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock  Grid.Row="0" Style="{StaticResource TextBlockBase}" Text=" 検索結果" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <DataGrid Grid.Row="1" Margin="5,2,5,0" ItemsSource="{Binding DantaiList.Value}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="停止" Width="1*" Binding="{Binding StopKubun}"/>
+                            <DataGridTextColumn Header="品名コード" Width="2*" Binding="{Binding HimmeiCode}" />
+                            <DataGridTextColumn Header="品名" Width="3*" Binding="{Binding Himmei}" />
+                            <DataGridTextColumn Header="団体コード" Width="2*" Binding="{Binding DantaiCode}" />
+                            <DataGridTextColumn Header="団体名" Width="3*" Binding="{Binding DantaiName}" />
+                            <DataGridTextColumn Header="更新者" Width="3*" Binding="{Binding KoushinshaName}" />
+                            <DataGridTextColumn Header="更新日時" Width="2*" Binding="{Binding KoushinDateTime,StringFormat=yyyy/MM/dd hh:mm:ss}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </GroupBox>
+        </Grid>
+
+        <!-- Footer -->
+        <Grid Margin="0,0,0,0"  DockPanel.Dock="Bottom" Height="80" Width="1366">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <!--メッセージ領域-->
+            <Border Style="{StaticResource ErrorMessageRegion}" >
+                <TextBlock Grid.Row="0" Style="{StaticResource TextBlockBase}" Text="{Binding ErrorMessage.Value}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" x:Name="ErrorMessageTextBlock"/>
+            </Border>
+            <Grid Grid.Row="1" Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Style="{StaticResource ButtonBase}"  Content="閉じる" Background="#616161"/>
+                <Button Grid.Column="2" Style="{StaticResource ButtonBase}"   Content="クリア" Background="White" Foreground="#2196F3" Command="{Binding ClearCommand}"/>
+                <Button Grid.Column="3" Style="{StaticResource ButtonBase}"   Content="新　規" Command="{Binding MoveEntryPageCommand}"></Button>
+                <Button Grid.Column="4" Style="{StaticResource ButtonBase}"   Content="詳　細" Command="{Binding MoveEntryPageCommand}"></Button>
+            </Grid>
+        </Grid>
+
+    </DockPanel>
+    
+</UserControl>

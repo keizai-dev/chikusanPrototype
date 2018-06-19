@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="JaGunma.HeaderModule.Views.Header2View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JaGunma.HeaderModule.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="1366"
+             VerticalAlignment="Top"
+             HorizontalAlignment="Center"
+             Background="White">
+    <!--<Control.Effect>
+        <DropShadowEffect RenderingBias="Quality" ShadowDepth="4" Direction="270" Opacity="0.4"></DropShadowEffect>
+    </Control.Effect>-->
+        <!--<Border.Effect>
+            <DropShadowEffect RenderingBias="Quality" ShadowDepth="1" Direction="270"></DropShadowEffect>
+        </Border.Effect>-->
+    <Border BorderThickness="0,1,0,1" BorderBrush="{StaticResource PrimaryBrush}">
+        
+        <Grid Width="1366" Height="40" Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <!--<ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />-->
+            <!--<ColumnDefinition Width="0.2*" />-->
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <!--<Button Grid.Column="0" Content="メニュー" Style="{StaticResource ButtonStyle1}"></Button>-->
+        <!--<Button Style="{StaticResource HeaderButton}"  Grid.Column="0" Content="メニュー" Margin="5,0,0,0"/>-->
+        <StackPanel  Grid.Column="0"  Orientation="Horizontal"  Background="#ff5252" Margin="0,0,30,0" RenderOptions.BitmapScalingMode="HighQuality">
+            <!--<Image Source="{StaticResource HomeIcon}" Height="35" Width="35" Margin="20,0,0,0" Stretch="Fill"/>
+            <TextBlock Style="{StaticResource HeaderTextBlock}"  VerticalAlignment="Center" Text="メニュー"  Margin="0"></TextBlock>-->
+                <Button Style="{StaticResource MenuButton}" Margin="25,0,0,0"/>
+            </StackPanel>
+            <!--<TextBlock Style="{StaticResource HeaderTextBlock}" Grid.Column="1" Text="006" VerticalAlignment="Center" Margin="5,0,0,0"/>
+        <TextBlock Style="{StaticResource HeaderTextBlock}" Grid.Column="2" Text="001"  VerticalAlignment="Center" Margin="5,0,0,0"/>-->
+        <StackPanel  Grid.Column="1"  Orientation="Horizontal"  Background="#ff5252" Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality">
+            <Image Source="{StaticResource PeopleIcon}" Height="35" Width="35"  Margin="5,0,0,0" Stretch="Fill"></Image>
+            <TextBlock Style="{StaticResource HeaderTextBlock}"  VerticalAlignment="Center" Text="006 001 AN000001 JA前橋市　電算太郎"  Margin="5,0,0,0"></TextBlock>
+        </StackPanel>
+        <TextBlock Style="{StaticResource HeaderTextBlock}"   Grid.Column="2" TextWrapping="Wrap" Text="小" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource AccentBrush}"/>
+        <Slider Style="{StaticResource CustomSliderStyle}" Grid.Column="3" x:Name="CustomSliderWithTick" Value="{Binding FontSize, Mode=TwoWay}" Foreground="{DynamicResource AccentBrush}"/>
+        <TextBlock  Style="{StaticResource HeaderTextBlock}"  Grid.Column="4" TextWrapping="Wrap" Text="大" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource AccentBrush}"/>
+        <!--<Button Style="{StaticResource HeaderButton}" Grid.Column="5" Content="ログアウト"   Command="{Binding TestCommand}" Margin="0,0,5,0"></Button>-->
+            <StackPanel  Grid.Column="5"  Orientation="Horizontal"  Background="#ff5252" Margin="0,0,0,0" RenderOptions.BitmapScalingMode="HighQuality">
+                <Image Source="{StaticResource ExitIcon}" Stretch="Fill" Height="35" Width="35"  Margin="30,0,0,0"/>
+                <TextBlock Style="{StaticResource HeaderTextBlock}"  VerticalAlignment="Center" Text="ログアウト"  Margin="0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

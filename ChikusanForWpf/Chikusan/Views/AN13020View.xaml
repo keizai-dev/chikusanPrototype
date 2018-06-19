@@ -1,0 +1,249 @@
+﻿<UserControl x:Class="JaGunma.Chikusan.Views.AN13020View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:b="clr-namespace:JaGunma.Chikusan.Behaviors"
+             xmlns:c="clr-namespace:JaGunma.Chikusan.Converters"
+             xmlns:m="clr-namespace:JaGunma.Chikusan.Message"
+             xmlns:ring="clr-namespace:JaGunma.Chikusan.Loading"
+             xmlns:local="clr-namespace:JaGunma.Chikusan.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             VerticalAlignment="Bottom"
+             HorizontalAlignment="Center"
+             Background="#BDBDBD"
+             TextOptions.TextFormattingMode ="Ideal"
+             TextOptions.TextRenderingMode ="Auto"
+             RenderOptions.BitmapScalingMode ="NearestNeighbor"
+             Loaded="UserControl_Loaded">
+    <!--d:DesignHeight="728" d:DesignWidth="1366"-->
+    <!--Style="{StaticResource UserControlBase}">-->
+    
+    <UserControl.Resources>
+        <c:StopKubunConverter x:Key="stopKubunConverter" />
+        <c:MessageRegionColorConverter x:Key="messageRegionColorConverter" />
+        <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NewPageRequest}">
+            <b:ShowAnotherWindowAction />
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding SinglePageRequest}">
+            <b:ShowAnotherSingleWindowAction />
+        </prism:InteractionRequestTrigger>
+        <m:DialogTrigger>
+            <m:DialogAction />
+        </m:DialogTrigger>
+    </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <b:UserControlBehavior />
+    </i:Interaction.Behaviors>
+    
+    <Viewbox Margin="0" Stretch="Fill">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="40"/>
+                <RowDefinition Height ="728"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.RowSpan="2" Background="Black" Panel.ZIndex="10" Opacity="0.6" Visibility="{Binding IsLoading,Converter={StaticResource boolToVisibilityConverter}}" >
+                <ring:LoadingDottedRing Margin="300"/>
+            </Border>
+            <local:HeaderView Grid.Row="0" />
+            <!--<ContentControl Visibility="Collapsed" Content="{StaticResource proxyElement}" />-->
+            <DockPanel Grid.Row="1">
+                <Grid DockPanel.Dock="Top" Width="1366" Height="638" Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="11*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <!--一覧エリア-->
+                    <GroupBox Grid.Row="0" Style="{StaticResource ItemGroupAreaGroupBox}"  Margin="10">
+                        <Grid Margin="15,2,15,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="19*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="-15,2,0,0">
+                                <Border BorderBrush="#FF5252" BorderThickness="3"  Background="#FFFFFFFF" Padding="0" CornerRadius="10" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock  Grid.Row="0" Style="{StaticResource TextBlockBase}" Text=" エラー一覧" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            </StackPanel>
+                            <DataGrid Grid.Row="1" Margin="5,2,5,0" ItemsSource="{Binding ShikiriList.Value}" SelectedItem="{Binding SelectedShikiri.Value}" Style="{StaticResource ScrollDataGrid}" FrozenColumnCount="2">
+                                <DataGrid.InputBindings>
+                                    <MouseBinding MouseAction="LeftDoubleClick"  Command="{Binding MoveUpdatePageCommand}"/>
+                                    <KeyBinding Gesture="Enter"  Command="{Binding MoveUpdatePageCommand}"/>
+                                </DataGrid.InputBindings>
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn IsReadOnly="False" >
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsAllSelected,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CheckBoxBase}" Command="{Binding AllSelectChangeCommand}" DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CheckBoxBase}" Command="{Binding TestCommand}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Width="100" Header="処理日" Binding="{Binding ShoriDate}" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Binding="{Binding ShikiriNo}" Width="100" Header="仕切No" />
+                                    <DataGridTemplateColumn Width="300" SortMemberPath="HimmeiCode" CanUserSort="True">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="品名"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="3*" />
+                                                        <ColumnDefinition Width="7*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding HimmeiCode}" TextAlignment="Center"/>
+                                                    <Border Grid.Column="1"  BorderThickness="1,0,0,0" BorderBrush="{StaticResource PrimaryBrush}" Margin="-3"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding Himmei}" TextAlignment="Left"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="200" SortMemberPath="ShishoCode" CanUserSort="True">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="支所"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="3*" />
+                                                        <ColumnDefinition Width="7*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding ShishoCode}" TextAlignment="Center"/>
+                                                    <Border Grid.Column="1"  BorderThickness="1,0,0,0" BorderBrush="{StaticResource PrimaryBrush}" Margin="-3"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding ShishoName}" TextAlignment="Left"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="300" SortMemberPath="ShukkashaCode" CanUserSort="True">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="出荷者"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="3*" />
+                                                        <ColumnDefinition Width="7*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding ShukkashaCode}" TextAlignment="Center"/>
+                                                    <Border Grid.Column="1"  BorderThickness="1,0,0,0" BorderBrush="{StaticResource PrimaryBrush}" Margin="-3"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding ShukkashaName}" TextAlignment="Left"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="300" SortMemberPath="UnsougyoushaCode" CanUserSort="True">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="運送業者"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="3*" />
+                                                        <ColumnDefinition Width="7*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding UnsougyoushaCode}" TextAlignment="Center"/>
+                                                    <Border Grid.Column="1"  BorderThickness="1,0,0,0" BorderBrush="{StaticResource PrimaryBrush}" Margin="-3"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding UnsougyoushaName}" TextAlignment="Left"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="300" SortMemberPath="ShukkasakiCode" CanUserSort="True">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="出荷先"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="6*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding ShukkasakiCode}" TextAlignment="Center"/>
+                                                    <Border Grid.Column="1"  BorderThickness="1,0,0,0" BorderBrush="{StaticResource PrimaryBrush}" Margin="-3"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding ShukkasakiName}" TextAlignment="Left"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding ShukkaDate}" Width="100" Header="出荷日"  />
+                                    <DataGridTextColumn Binding="{Binding ErrorItem}"  Width="200" Header="エラー項目"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+
+                    </GroupBox>
+                    <ComboBox Grid.Row="1" Width="200" IsEditable="True" Height="30" TextSearch.TextPath="HimmeiCode" ItemsSource="{Binding Himmei}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding HimmeiCode}" Margin="2.5"/>
+                                    <TextBlock Text="{Binding Himmei}" Margin="2.5"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+
+                <!-- Footer -->
+                <Grid Margin="0"  DockPanel.Dock="Bottom" Height="80" Width="1366">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <!--メッセージ領域-->
+                    <Border Style="{StaticResource ErrorMessageRegion}" Background="{Binding CheckResult,Mode=TwoWay,Converter={StaticResource messageRegionColorConverter}}" Margin="10,0,10,0">
+                        <TextBlock Grid.Row="0" Style="{StaticResource TextBlockBase}" Text="{Binding CheckResult.Message,Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" x:Name="ErrorMessageTextBlock"/>
+                    </Border>
+                    <Grid Grid.Row="1" Margin="0,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Style="{StaticResource CloseButton}"  Command="Close" Margin="20,0,20,0"/>
+                        <UniformGrid Grid.Column="2" Rows="1" Margin="10,0,-20,0" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource ClearButton}" Command="{Binding ClearCommand}" Margin="20,0,20,0"/>
+                            <Button Style="{StaticResource ButtonBase}" Content="削　除" Command="{Binding DeleteCommand}" Margin="20,0,20,0"/>
+                            <Button Style="{StaticResource ButtonBase}" Content="詳　細" Command="{Binding MoveDetailPageCommand}" Margin="20,0,20,0"/>
+                        </UniformGrid>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Viewbox>
+</UserControl>

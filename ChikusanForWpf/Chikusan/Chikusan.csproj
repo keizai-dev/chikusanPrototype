@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D49236BA-6823-4888-9347-4BE925600618}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JaGunma.Chikusan</RootNamespace>
+    <AssemblyName>Chikusan</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LoadingRing">
+      <HintPath>..\DLL\LoadingRing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.6.3.0\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReactiveProperty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.4.2.2\lib\net46\ReactiveProperty.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReactiveProperty.NET46, Version=4.2.6684.24516, Culture=neutral, PublicKeyToken=3d1fed915120cbde, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.4.2.2\lib\net46\ReactiveProperty.NET46.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net46\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net46\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\ShowAnotherSingleWindowAction.cs" />
+    <Compile Include="Behaviors\UserControlBehavior.cs" />
+    <Compile Include="Commons\DisplayMode.cs" />
+    <Compile Include="Converters\StopKubunConverter.cs" />
+    <Compile Include="Converters\MessageRegionColorConverter.cs" />
+    <Compile Include="Converters\TextColorConverter.cs" />
+    <Compile Include="Dto\HimmeiDto.cs" />
+    <Compile Include="Dto\ShikiriDto.cs" />
+    <Compile Include="Loading\LoadingDottedRing.cs" />
+    <Compile Include="Loading\LoadingRingBase.xaml.cs" />
+    <Compile Include="Loading\LoadingSegments.cs" />
+    <Compile Include="Message\HimmeiSearchResult.cs" />
+    <Compile Include="Message\HimmeiSearchParameter.cs" />
+    <Compile Include="Message\FileOpenParameter.cs" />
+    <Compile Include="Message\FileSaveParameter.cs" />
+    <Compile Include="Message\FileOpenResult.cs" />
+    <Compile Include="Message\FileSaveResult.cs" />
+    <Compile Include="Models\AN22020Model.cs" />
+    <Compile Include="Models\AN22021Model.cs" />
+    <Compile Include="Models\ShikiriModel.cs" />
+    <Compile Include="RetentionData\AN13020RetentionData.cs" />
+    <Compile Include="RetentionData\HeaderRetentionData.cs" />
+    <Compile Include="RetentionData\AN22021RetentionData.cs" />
+    <Compile Include="RetentionData\AN22020RetentionData.cs" />
+    <Compile Include="Dto\DantaiDto.cs" />
+    <Compile Include="Message\CheckResult.cs" />
+    <Compile Include="Message\NormalDialog.xaml.cs">
+      <DependentUpon>NormalDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Message\DialogAction.cs" />
+    <Compile Include="Message\DialogTrigger.cs" />
+    <Compile Include="Message\MessageConstants.cs" />
+    <Compile Include="Message\DialogParameter.cs" />
+    <Compile Include="Message\DialogResult.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AbstractViewModel.cs" />
+    <Compile Include="ViewModels\AN13020ViewModel.cs" />
+    <Compile Include="ViewModels\AN22021ViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\AN22020ViewModel.cs" />
+    <Compile Include="ViewModels\HeaderViewModel.cs" />
+    <Compile Include="Views\AN13020View.xaml.cs">
+      <DependentUpon>AN13020View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Message\HimmeiSearchDialog.xaml.cs">
+      <DependentUpon>HimmeiSearchDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AN22021View.xaml.cs">
+      <DependentUpon>AN22021View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AN22020View.xaml.cs">
+      <DependentUpon>AN22020View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Behaviors\FocusExtention.cs" />
+    <Compile Include="Views\HeaderView.xaml.cs">
+      <DependentUpon>HeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Behaviors\ShowAnotherWindowAction.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Loading\LoadingRingBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Message\NormalDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\MainStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AN13020View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Message\HimmeiSearchDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AN22021View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AN22020View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HeaderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SearchIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PeopleIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MenuIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ExitIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\HomeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\StopIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CautionIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WarningIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LockOpenIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LockIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ErrorIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\InfoIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\QuestionIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WarningIcon2.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

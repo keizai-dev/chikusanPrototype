@@ -1,0 +1,2 @@
+C:\Users\80-i-tajima\Documents\ChikusanForWpf\ChikusanForWpf\ChikusanForWpf\bin\Debug\ChikusanForWpf.exe.config
+C:\Users\80-i-tajima\Documents\ChikusanForWpf\ChikusanForWpf\ChikusanForWpf\bin\Debug\Shell.exe.config
