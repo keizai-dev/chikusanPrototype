@@ -23,7 +23,7 @@ namespace JaGunma.MainModule
         {
             // Git Test Tajima3
             this.Container.RegisterType<object, AN82070View>(nameof(AN82070View));
-
+　　　　　　 // From Git hub　
 	    // Git Test Hasegawa3
             // register views @ region
             this.RegionManager.RegisterViewWithRegion("MainRegion", typeof(AN82070View));
