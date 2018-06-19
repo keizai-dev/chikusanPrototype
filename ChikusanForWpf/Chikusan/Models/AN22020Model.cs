@@ -425,7 +425,6 @@ namespace JaGunma.Chikusan.Models
             {
                 checkResult.Message = MessageConstants.WARNING_MESSAGE_001.Replace("{0}", "更新者コード");
                 checkResult.SetWarningType();
-                //this.IsDantaiCodeError = true;
                 return checkResult;
             }
             checkResult.SetSuccessType();
