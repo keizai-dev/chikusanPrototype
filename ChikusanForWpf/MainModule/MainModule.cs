@@ -21,7 +21,7 @@ namespace JaGunma.MainModule
 
         public void Initialize()
         {
-            // Git Test Tajima2
+            // Git Test Tajima3
             this.Container.RegisterType<object, AN82070View>(nameof(AN82070View));
 
             // register views @ region
