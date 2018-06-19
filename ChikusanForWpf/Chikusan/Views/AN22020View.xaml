@@ -56,7 +56,7 @@
             <Border Grid.RowSpan="2" Background="Black" Panel.ZIndex="10" Opacity="0.6" Visibility="{Binding IsLoading,Converter={StaticResource boolToVisibilityConverter}}" >
                 <ring:LoadingDottedRing Margin="300"/>
             </Border>
-            <local:Header2View Grid.Row="0" />
+            <local:HeaderView Grid.Row="0" />
             <!--<ContentControl Visibility="Collapsed" Content="{StaticResource proxyElement}" />-->
             <DockPanel Grid.Row="1">
                 <Grid DockPanel.Dock="Top" Width="1366" Height="638" Margin="0,10,0,0">
